@@ -54,7 +54,7 @@ public class FileGenerator {
             try(FileWriter writer = new FileWriter(file)) {
                 for (int j = 0; j < linesInFile; j++) {
                     int randomNumber = generateValue();
-                    writer.write(randomNumber);
+                    writer.write(randomNumber + System.lineSeparator());
                 }
 
             } catch (IOException exception) {
