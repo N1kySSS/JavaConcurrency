@@ -25,8 +25,8 @@ public class EntryPoint {
 
     public static void outputResult() {
         long start = System.currentTimeMillis();
-        System.out.println(summator.sumAllFiles(DIRECTORY));
+        int result = summator.sumAllFiles(DIRECTORY);
         long end = System.currentTimeMillis();
-        System.out.println("Время выполнения: " + (end - start)/1000.0);
+        Saver.save("SingleThread", result, end - start);
     }
 }
