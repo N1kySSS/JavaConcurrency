@@ -21,12 +21,12 @@ public class SingleSummator {
                     try {
                         int number = Integer.parseInt(scanner.nextLine());
                         sum += number;
-                    } catch (NumberFormatException e) {
-                        System.out.println(e.getMessage());
+                    } catch (NumberFormatException numberFormatException) {
+                        System.out.println(numberFormatException.getMessage());
                     }
                 }
-            } catch (FileNotFoundException e) {
-                System.out.println(e.getMessage());;
+            } catch (FileNotFoundException fileNotFoundException) {
+                System.out.println(fileNotFoundException.getMessage());;
             }
         }
 
