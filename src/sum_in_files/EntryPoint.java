@@ -7,7 +7,7 @@ import sum_in_files.util.Saver;
 
 public class EntryPoint {
     private static final int COUNT_FILES = 223;
-    private static final String DIRECTORY = "D:\\Data\\Projects\\JavaConcurrency\\src\\sum_in_files\\files";
+    private static final String DIRECTORY = "src/sum_in_files/files";
     private static final int LINES_IN_FILES = 99999;
 
     private static final FileGenerator FILE_GENERATOR = new FileGenerator();

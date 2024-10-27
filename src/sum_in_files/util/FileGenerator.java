@@ -3,6 +3,9 @@ package sum_in_files.util;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Random;
 
 public class FileGenerator {
@@ -10,8 +13,18 @@ public class FileGenerator {
     private final Random random = new Random();
 
     public void createFiles(String directoryPath, int n) {
+        Path directory = Paths.get(directoryPath);
+
+        try {
+            Files.createDirectories(directory);
+        } catch (IOException ioException) {
+            System.out.println("Ошибка создания пакета: " + ioException.getMessage());
+            return;
+        }
+
         for (int i = 1; i <= n; i++) {
-            File file = new File(directoryPath + "/" + i + ".txt");
+            Path filePath = directory.resolve(i + ".txt");
+            File file = new File(filePath.toString());
 
             try {
                 if (file.createNewFile()) {
@@ -19,31 +32,40 @@ public class FileGenerator {
                 } else {
                     System.out.println("Файл " + file.getName() + " уже существует");
                 }
-            } catch (IOException exception) {
-                System.out.println(exception.getMessage());
+            } catch (IOException ioException) {
+                System.out.println(ioException.getMessage());
             }
         }
     }
 
     public void createFile(String path) {
-        File file = new File(path);
-        file.getParentFile().mkdirs();
+        Path filePath = Paths.get(path);
 
         try {
-            file.createNewFile();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            Files.createDirectories(filePath.getParent());
+            Files.createFile(filePath);
+        } catch (IOException ioException) {
+            System.out.println("Ошибка создания файла: " + ioException.getMessage());
         }
     }
 
 
     public void fillFilesWithNumbers(String directoryPath, int countFiles, int linesInFile) {
+        Path directory = Paths.get(directoryPath);
+
+        try {
+            Files.createDirectories(directory);
+        } catch (IOException ioException) {
+            System.out.println("Ошибка создания пакета: " + ioException.getMessage());
+            return;
+        }
+
         for (int i = 1; i < countFiles; i++) {
-            String path = directoryPath + "/" + i + ".txt";
-            File file = new File(path);
+            Path filePath = directory.resolve(i + ".txt");
+            File file = filePath.toFile();
 
             if (!file.exists()) {
-                createFile(path);
+                createFile(filePath.toString());
             }
 
             if (file.length() > 0) {
@@ -57,8 +79,8 @@ public class FileGenerator {
                     writer.write(randomNumber + System.lineSeparator());
                 }
 
-            } catch (IOException exception) {
-                System.out.println(exception.getMessage());
+            } catch (IOException ioException) {
+                System.out.println(ioException.getMessage());
             }
         }
     }
@@ -68,25 +90,26 @@ public class FileGenerator {
     }
 
     public void clearFileContents(String directoryPath) {
-        File directory = new File(directoryPath);
+        Path directory = Paths.get(directoryPath);
 
-        if (!directory.exists() || !directory.isDirectory()) {
+        if (!Files.exists(directory) || !Files.isDirectory(directory)) {
             return;
         }
 
-        File[] files = directory.listFiles();
-        if (files != null) {
-            for (File file : files) {
-
-                if (file.isFile()) {
-                    try (FileWriter writer = new FileWriter(file)) {
-                        writer.write("");  // Записываем пустую строку
-                        System.out.println("Содержимое файла " + file.getName() + " очищено.");
-                    } catch (IOException e) {
-                        System.out.println("Ошибка при очистке файла " + file.getName() + ": " + e.getMessage());
+        try (var filePaths = Files.list(directory)) {
+            filePaths.forEach(filePath -> {
+                if (Files.isRegularFile(filePath)) {
+                    try (FileWriter writer = new FileWriter(filePath.toFile())) {
+                        writer.write("");
+                        System.out.println("Содержимое файла " + filePath.getFileName() + " очищено.");
+                    } catch (IOException ioException) {
+                        System.out.println("Ошибка при очистке файла " +
+                                filePath.getFileName() + ": " + ioException.getMessage());
                     }
                 }
-            }
+            });
+        } catch (IOException ioException) {
+            System.out.println("Ошибка при очистке файлов в директории: " + ioException.getMessage());
         }
     }
 }
