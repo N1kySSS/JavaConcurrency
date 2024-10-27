@@ -1,5 +1,6 @@
 package sum_in_files;
 
+import sum_in_files.executors.MultithreadingSummator;
 import sum_in_files.executors.SingleSummator;
 import sum_in_files.util.FileGenerator;
 import sum_in_files.util.Saver;
@@ -11,11 +12,13 @@ public class EntryPoint {
 
     private static final FileGenerator FILE_GENERATOR = new FileGenerator();
     private static final SingleSummator SINGLE_SUMMATOR = new SingleSummator();
+    private static final MultithreadingSummator MULTITHREADING_SUMMATOR = new MultithreadingSummator();
 
     public static void main(String[] args) {
         clearFiles();
         createAndFill();
-        outputResult();
+        outputSingleThreadResult();
+        outputMultiThreadResult();
     }
 
     public static void createAndFill() {
@@ -27,10 +30,17 @@ public class EntryPoint {
         FILE_GENERATOR.clearFileContents(DIRECTORY);
     }
 
-    public static void outputResult() {
+    public static void outputSingleThreadResult() {
         long start = System.currentTimeMillis();
         int result = SINGLE_SUMMATOR.sumAllFiles(DIRECTORY);
         long end = System.currentTimeMillis();
         Saver.save("SingleThread", result, end - start);
+    }
+
+    public static void outputMultiThreadResult() {
+        long start = System.currentTimeMillis();
+        int result = MULTITHREADING_SUMMATOR.sumFiles(DIRECTORY);
+        long end = System.currentTimeMillis();
+        Saver.save("MultiThread", result, end - start);
     }
 }
