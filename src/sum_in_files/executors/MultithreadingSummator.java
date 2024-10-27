@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class MultithreadingSummator {
 
     protected volatile int sum = 0;
-    private static final int THREAD_NUMBER = 8;
+    private static final int THREAD_NUMBER = Runtime.getRuntime().availableProcessors() / 2;
 
     private synchronized void adding(int value) {
         sum += value;
