@@ -7,14 +7,11 @@ import java.util.Random;
 
 public class FileGenerator {
 
-    private static final int COUNT_FILES = 13;
-    private static final File DIRECTORY = new File("D:\\Data\\Projects\\JavaConcurrency\\src\\sum_in_files\\files");
-
     private final Random random = new Random();
 
-    public void createFiles() {
-        for (int i = 1; i <= COUNT_FILES; i++) {
-            File file = new File(DIRECTORY + "/" + i + ".txt");
+    public void createFiles(String directoryPath, int n) {
+        for (int i = 1; i <= n; i++) {
+            File file = new File(directoryPath + "/" + i + ".txt");
 
             try {
                 if (file.createNewFile()) {
@@ -40,8 +37,8 @@ public class FileGenerator {
     }
 
 
-    public void fillFilesWithNumbers(String directoryPath, int linesInFile) {
-        for (int i = 1; i < COUNT_FILES; i++) {
+    public void fillFilesWithNumbers(String directoryPath, int countFiles, int linesInFile) {
+        for (int i = 1; i < countFiles; i++) {
             String path = directoryPath + "/" + i + ".txt";
             File file = new File(path);
 
