@@ -5,13 +5,13 @@ import java.io.IOException;
 
 public class FileGenerator {
 
-    private static final int countFiles = 13;
+    private static final int COUNT_FILES = 13;
     private static final File DIRECTORY = new File("D:\\Data\\Projects\\JavaConcurrency\\src\\sum_in_files\\files");
 
 
     private void createFiles() {
 
-        for(int i = 1; i <= countFiles; i++) {
+        for(int i = 1; i <= COUNT_FILES; i++) {
             File file = new File(DIRECTORY + "/" + i + ".txt");
             try {
                 if (file.createNewFile()) {
