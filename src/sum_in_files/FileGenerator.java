@@ -12,7 +12,7 @@ public class FileGenerator {
     private final Random random = new Random();
 
     public void createFiles() {
-        for(int i = 1; i <= COUNT_FILES; i++) {
+        for (int i = 1; i <= COUNT_FILES; i++) {
             File file = new File(DIRECTORY + "/" + i + ".txt");
 
             try {
@@ -24,6 +24,17 @@ public class FileGenerator {
             } catch (IOException exception) {
                 System.out.println(exception.getMessage());
             }
+        }
+    }
+
+    public void createFile(String path) {
+        File file = new File(path);
+        file.getParentFile().mkdirs();
+
+        try {
+            file.createNewFile();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
