@@ -1,4 +1,4 @@
-package sum_in_files;
+package sum_in_files.util;
 
 import java.io.File;
 import java.io.FileWriter;

@@ -1,5 +1,9 @@
 package sum_in_files;
 
+import sum_in_files.executors.SingleSummator;
+import sum_in_files.util.FileGenerator;
+import sum_in_files.util.Saver;
+
 public class EntryPoint {
     private static final int COUNT_FILES = 223;
     private static final String DIRECTORY = "D:\\Data\\Projects\\JavaConcurrency\\src\\sum_in_files\\files";

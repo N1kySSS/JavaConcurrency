@@ -1,4 +1,4 @@
-package sum_in_files;
+package sum_in_files.executors;
 
 import java.io.*;
 import java.util.Scanner;
