@@ -12,9 +12,9 @@ public class FileGenerator {
     private final Random random = new Random();
 
     public void createFiles() {
-
         for(int i = 1; i <= COUNT_FILES; i++) {
             File file = new File(DIRECTORY + "/" + i + ".txt");
+
             try {
                 if (file.createNewFile()) {
                     System.out.println("Файл " + file.getName() + " создан");
