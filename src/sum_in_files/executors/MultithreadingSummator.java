@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class MultithreadingSummator {
 
     protected volatile int sum = 0;
-    private static final int THREAD_NUMBER = Runtime.getRuntime().availableProcessors() / 2;
+    private static final int THREADS_NUMBER = Runtime.getRuntime().availableProcessors() / 2;
 
     private synchronized void adding(int value) {
         sum += value;
@@ -39,12 +39,12 @@ public class MultithreadingSummator {
             return Integer.MIN_VALUE;
         }
 
-        Thread[] threads = new Thread[THREAD_NUMBER];
-        int range = files.length / THREAD_NUMBER;
+        Thread[] threads = new Thread[THREADS_NUMBER];
+        int range = files.length / THREADS_NUMBER;
 
-        for (int i = 0; i < THREAD_NUMBER; i++) {
+        for (int i = 0; i < THREADS_NUMBER; i++) {
             int startFileNumber = i * range;
-            int endFileNumber = (i == THREAD_NUMBER - 1) ? files.length : (startFileNumber + range);
+            int endFileNumber = (i == THREADS_NUMBER - 1) ? files.length : (startFileNumber + range);
 
             threads[i] = new Thread(() -> {
                 int sumInRange = sumFilesRange(files, startFileNumber, endFileNumber);
