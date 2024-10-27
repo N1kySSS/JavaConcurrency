@@ -46,6 +46,11 @@ public class FileGenerator {
                 createFile(path);
             }
 
+            if (file.length() > 0) {
+                System.out.println("Файл " + file.getName() + " уже заполнен");
+                continue;
+            }
+
             try(FileWriter writer = new FileWriter(file)) {
                 for (int j = 0; j < linesInFile; j++) {
                     int randomNumber = generateValue();
