@@ -51,7 +51,7 @@ public class FileGenerator {
                 continue;
             }
 
-            try(FileWriter writer = new FileWriter(file)) {
+            try (FileWriter writer = new FileWriter(file)) {
                 for (int j = 0; j < linesInFile; j++) {
                     int randomNumber = generateValue();
                     writer.write(randomNumber + System.lineSeparator());
@@ -65,5 +65,28 @@ public class FileGenerator {
 
     public int generateValue() {
         return random.nextInt(-10, 11);
+    }
+
+    public void clearFileContents(String directoryPath) {
+        File directory = new File(directoryPath);
+
+        if (!directory.exists() || !directory.isDirectory()) {
+            return;
+        }
+
+        File[] files = directory.listFiles();
+        if (files != null) {
+            for (File file : files) {
+
+                if (file.isFile()) {
+                    try (FileWriter writer = new FileWriter(file)) {
+                        writer.write("");  // Записываем пустую строку
+                        System.out.println("Содержимое файла " + file.getName() + " очищено.");
+                    } catch (IOException e) {
+                        System.out.println("Ошибка при очистке файла " + file.getName() + ": " + e.getMessage());
+                    }
+                }
+            }
+        }
     }
 }
