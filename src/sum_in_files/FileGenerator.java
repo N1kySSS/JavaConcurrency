@@ -1,6 +1,7 @@
 package sum_in_files;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 
@@ -35,6 +36,28 @@ public class FileGenerator {
             file.createNewFile();
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+
+    public void fillFilesWithNumbers(String directoryPath, int linesInFile) {
+        for (int i = 1; i < COUNT_FILES; i++) {
+            String path = directoryPath + "/" + i + ".txt";
+            File file = new File(path);
+
+            if (!file.exists()) {
+                createFile(path);
+            }
+
+            try(FileWriter writer = new FileWriter(file)) {
+                for (int j = 0; j < linesInFile; j++) {
+                    int randomNumber = generateValue();
+                    writer.write(randomNumber);
+                }
+
+            } catch (IOException exception) {
+                System.out.println(exception.getMessage());
+            }
         }
     }
 
