@@ -1,5 +1,6 @@
 ### Project ###
 src/sum_in_files/files/
+src/sum_in_files/results/
 
 ### IntelliJ IDEA ###
 .idea/
