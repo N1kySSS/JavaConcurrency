@@ -9,7 +9,7 @@ public class FileGenerator {
     private static final File DIRECTORY = new File("D:\\Data\\Projects\\JavaConcurrency\\src\\sum_in_files\\files");
 
 
-    private void createFiles() {
+    public void createFiles() {
 
         for(int i = 1; i <= COUNT_FILES; i++) {
             File file = new File(DIRECTORY + "/" + i + ".txt");
