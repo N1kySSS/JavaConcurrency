@@ -14,6 +14,6 @@ public class ProducerConsumerTest {
         new Thread(firstProducer, "First producer").start();
         new Thread(secondProducer, "Second producer").start();
         new Thread(firstConsumer, "First consumer").start();
-        new Thread(secondConsumer, "First consumer").start();
+        new Thread(secondConsumer, "Second consumer").start();
     }
 }
