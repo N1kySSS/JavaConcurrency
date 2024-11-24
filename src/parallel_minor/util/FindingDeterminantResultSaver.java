@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,7 +13,7 @@ public class FindingDeterminantResultSaver {
 
     private static final String resultDirectory = "src/parallel_minor/results";
 
-    public static void save(String resultFileName, long executionTimeMillis, long result) {
+    public static void save(String resultFileName, long executionTimeMillis, BigInteger result) {
         if (!resultFileName.endsWith(".txt")) {
             System.out.println("Неверное расширение файла");
             return;

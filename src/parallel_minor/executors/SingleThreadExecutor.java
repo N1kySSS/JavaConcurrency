@@ -1,5 +1,7 @@
 package parallel_minor.executors;
 
+import java.math.BigInteger;
+
 public class SingleThreadExecutor {
 
     private static int[][] minor(int[][] matrix, int row, int column) {
@@ -26,22 +28,26 @@ public class SingleThreadExecutor {
         return minorMatrix;
     }
 
-    public long calculateDeterminant(int[][] matrix) {
+    public BigInteger calculateDeterminant(int[][] matrix) {
         int n = matrix.length;
 
         if (n == 1) {
-            return matrix[0][0];
+            return BigInteger.valueOf(matrix[0][0]);
         }
 
         if (n == 2) {
-            return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0];
+            return BigInteger.valueOf(matrix[0][0])
+                    .multiply(BigInteger.valueOf(matrix[1][1]))
+                    .subtract(BigInteger.valueOf(matrix[0][1])
+                            .multiply(BigInteger.valueOf(matrix[1][0])));
         }
 
-        int result = 0;
+        BigInteger result = BigInteger.ZERO;
 
         for (int column = 0; column < n; column++) {
-            result += (long) Math.pow(-1, column) * matrix[0][column] *
-                    calculateDeterminant(minor(matrix, 0, column));
+            result = result.add(BigInteger.valueOf((long) Math.pow(-1, column))
+                    .multiply(BigInteger.valueOf(matrix[0][column]))
+                    .multiply(calculateDeterminant(minor(matrix, 0, column))));
         }
 
         return result;
