@@ -36,7 +36,7 @@ public class MatrixGenerator {
 
         try {
             if (file.createNewFile()) {
-                System.out.println("Файл " + file.getName() + "успешно создан");
+                System.out.println("Файл " + file.getName() + " успешно создан");
             }
         } catch (IOException ioException) {
             System.err.println("Ошибка создания файла: " + ioException.getMessage());
@@ -72,6 +72,8 @@ public class MatrixGenerator {
         } catch (IOException ioException) {
             System.err.println("Ошибка записи в файл: " + ioException.getMessage());
         }
+
+        System.out.println("Матрица успешно заполнена");
     }
 
     public void createAndSaveMatrix() {
