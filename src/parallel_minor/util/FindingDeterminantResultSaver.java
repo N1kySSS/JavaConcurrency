@@ -38,4 +38,20 @@ public class FindingDeterminantResultSaver {
             System.err.println("Ошибка сохранения результата: " + ioException.getMessage());
         }
     }
+
+    private static File createFileIfNotExists(Path filePath) {
+        File file = new File(filePath.toString());
+
+        if (!file.exists()) {
+            try {
+                if (file.createNewFile()) {
+                    System.out.println("Файл " + file.getName() + " создан");
+                }
+            } catch (IOException ioException) {
+                System.err.println("Ошибка создания файла: " + ioException.getMessage());
+            }
+        }
+
+        return file;
+    }
 }
