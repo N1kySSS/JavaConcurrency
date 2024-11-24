@@ -1,4 +1,4 @@
-package parallel_minor;
+package parallel_minor.util;
 
 import java.io.BufferedWriter;
 import java.io.File;
