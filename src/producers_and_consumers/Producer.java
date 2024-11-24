@@ -20,10 +20,12 @@ public class Producer<ProductType> implements Runnable {
     public void run() {
         try {
             while (true) {
+                updateGUI(table, Thread.currentThread(), Thread.State.TIMED_WAITING);
                 MILLISECONDS.sleep(timeToProduce);
+                updateGUI(table, Thread.currentThread(), Thread.State.WAITING);
+
                 ProductType product = (ProductType) ("Product №" + produceCounter.getAndIncrement());
                 table.produce(product);
-                updateGUI(table);
             }
 
         } catch (InterruptedException interruptedException) {

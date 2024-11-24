@@ -17,8 +17,9 @@ public class Consumer<ProductType> implements Runnable {
     public void run() {
         try {
             while (true) {
+                updateGUI(table, Thread.currentThread(), Thread.State.WAITING);
                 ProductType product = table.consume();
-                updateGUI(table);
+                updateGUI(table, Thread.currentThread(), Thread.State.TIMED_WAITING);
                 MILLISECONDS.sleep(timeToConsume);
             }
 
