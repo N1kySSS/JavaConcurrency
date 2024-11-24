@@ -7,6 +7,7 @@ public class Table<ProductType> {
 
     private final Queue<ProductType> table;
     private final int capacity;
+    public int currentSize;
 
     public Table(int capacity) {
         this.table = new LinkedList<>();
@@ -19,6 +20,7 @@ public class Table<ProductType> {
         }
 
         table.add(product);
+        currentSize = table.size();
         System.out.println(Thread.currentThread().getName() + " produced product: " + product + ".\n" +
                 "Product count - " + table.size());
         notifyAll();
@@ -30,10 +32,15 @@ public class Table<ProductType> {
         }
 
         ProductType product = table.poll();
+        currentSize = table.size();
         System.out.println(Thread.currentThread().getName() + " consumed product: " + product + ".\n" +
                 "Product count - " + table.size());
         notifyAll();
 
         return product;
+    }
+
+    public int getCapacity() {
+        return capacity;
     }
 }

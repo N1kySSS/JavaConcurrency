@@ -3,6 +3,7 @@ package producers_and_consumers;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
+import static producers_and_consumers.ProducerConsumerTest.updateGUI;
 
 public class Producer<ProductType> implements Runnable {
 
@@ -22,6 +23,7 @@ public class Producer<ProductType> implements Runnable {
                 MILLISECONDS.sleep(timeToProduce);
                 ProductType product = (ProductType) ("Product №" + produceCounter.getAndIncrement());
                 table.produce(product);
+                updateGUI(table);
             }
 
         } catch (InterruptedException interruptedException) {
