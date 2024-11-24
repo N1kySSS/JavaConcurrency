@@ -26,7 +26,7 @@ public class SingleThreadExecutor {
         return minorMatrix;
     }
 
-    public int calculateDeterminant(int[][] matrix) {
+    public long calculateDeterminant(int[][] matrix) {
         int n = matrix.length;
 
         if (n == 1) {
@@ -40,7 +40,7 @@ public class SingleThreadExecutor {
         int result = 0;
 
         for (int column = 0; column < n; column++) {
-            result += (int) Math.pow(-1, column) * matrix[0][column] *
+            result += (long) Math.pow(-1, column) * matrix[0][column] *
                     calculateDeterminant(minor(matrix, 0, column));
         }
 
