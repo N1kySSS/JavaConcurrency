@@ -12,8 +12,8 @@ public class FindingDeterminantResultSaver {
 
     private static final String resultDirectory = "src/parallel_minor/results";
 
-    public static void save(String resultFileName, long executionTimeMillis, int result) {
-        if (!resultFileName.contains(".txt")) {
+    public static void save(String resultFileName, long executionTimeMillis, long result) {
+        if (!resultFileName.endsWith(".txt")) {
             System.out.println("Неверное расширение файла");
             return;
         }
@@ -27,7 +27,8 @@ public class FindingDeterminantResultSaver {
             return;
         }
 
-        File fileWithResult = new File(directory.resolve(resultFileName).toString());
+        Path filePath = directory.resolve(resultFileName);
+        File fileWithResult = createFileIfNotExists(filePath);
 
         try(BufferedWriter writer = new BufferedWriter(new FileWriter(fileWithResult))) {
             writer.write("Determinant: " + result);
