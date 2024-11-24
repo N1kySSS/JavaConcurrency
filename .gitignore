@@ -2,6 +2,9 @@
 src/sum_in_files/files/
 src/sum_in_files/results/
 
+src/parallel_minor/matrix/
+src/parallel_minor/results/
+
 ### IntelliJ IDEA ###
 .idea/
 out/
