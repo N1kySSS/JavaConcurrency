@@ -14,12 +14,14 @@ public class MatrixGenerator {
     private final int order;
     private final Random random = new Random();
 
+    private final String directoryPath = "src/parallel_minor/matrix";
+    private String fileName;
+
     public MatrixGenerator(int order) {
         this.order = order;
     }
 
     private File createMatrixFile() {
-        String directoryPath = "src/parallel_minor/matrix";
         Path directory = Paths.get(directoryPath);
 
         try {
@@ -74,10 +76,14 @@ public class MatrixGenerator {
 
     public void createAndSaveMatrix() {
         File file = createMatrixFile();
-
         if (file != null) {
+            fileName = file.getName();
             int[][] matrix = generateMatrix();
             saveMatrixToFile(matrix, file.getPath());
         }
+    }
+
+    public String getFilePath() {
+        return directoryPath + "/" + fileName;
     }
 }
