@@ -13,7 +13,7 @@ public class FindingDeterminantResultSaver {
     private static final String resultDirectory = "src/parallel_minor/results";
 
     public static void save(String resultFileName, long executionTimeMillis, int result) {
-        if (resultFileName.contains(".txt")) {
+        if (!resultFileName.contains(".txt")) {
             System.out.println("Неверное расширение файла");
             return;
         }
