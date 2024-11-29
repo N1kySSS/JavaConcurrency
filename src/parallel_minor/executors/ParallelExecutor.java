@@ -33,6 +33,8 @@ public class ParallelExecutor {
     }
 
     public BigInteger calculateDeterminant(int[][] matrix) throws InterruptedException {
+        // TODO: change the logic
+
         int n = matrix.length;
 
         if (n == 1) {
