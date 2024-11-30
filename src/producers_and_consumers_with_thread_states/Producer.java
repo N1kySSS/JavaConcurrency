@@ -1,9 +1,8 @@
-package producers_and_consumers;
+package producers_and_consumers_with_thread_states;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static java.util.concurrent.TimeUnit.MILLISECONDS;
-import static producers_and_consumers.ProducerConsumerTest.updateGUI;
 
 public class Producer<ProductType> implements Runnable {
 
@@ -20,10 +19,7 @@ public class Producer<ProductType> implements Runnable {
     public void run() {
         try {
             while (true) {
-                updateGUI(table, Thread.currentThread(), Thread.State.TIMED_WAITING);
                 MILLISECONDS.sleep(timeToProduce);
-                updateGUI(table, Thread.currentThread(), Thread.State.WAITING);
-
                 ProductType product = (ProductType) ("Product №" + produceCounter.getAndIncrement());
                 table.produce(product);
             }

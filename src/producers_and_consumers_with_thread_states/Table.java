@@ -1,7 +1,9 @@
-package producers_and_consumers;
+package producers_and_consumers_with_thread_states;
 
 import java.util.LinkedList;
 import java.util.Queue;
+
+import static producers_and_consumers_with_thread_states.ProducerConsumerTest.updateGUI;
 
 public class Table<ProductType> {
 
@@ -15,10 +17,12 @@ public class Table<ProductType> {
 
     public synchronized void produce(ProductType product) throws InterruptedException {
         while (table.size() == capacity) {
+            updateGUI(this, Thread.currentThread(), Thread.State.WAITING);
             wait();
         }
 
         table.add(product);
+        updateGUI(this, Thread.currentThread(), Thread.State.TIMED_WAITING);
         System.out.println(Thread.currentThread().getName() + " produced product: " + product + ".\n" +
                 "Product count - " + table.size());
         notifyAll();
@@ -26,10 +30,12 @@ public class Table<ProductType> {
 
     public synchronized ProductType consume() throws InterruptedException {
         while (table.isEmpty()) {
+            updateGUI(this, Thread.currentThread(), Thread.State.WAITING);
             wait();
         }
 
         ProductType product = table.poll();
+        updateGUI(this, Thread.currentThread(), Thread.State.TIMED_WAITING);
         System.out.println(Thread.currentThread().getName() + " consumed product: " + product + ".\n" +
                 "Product count - " + table.size());
         notifyAll();

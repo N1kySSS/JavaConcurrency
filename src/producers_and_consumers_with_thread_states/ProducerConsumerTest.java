@@ -1,4 +1,4 @@
-package producers_and_consumers;
+package producers_and_consumers_with_thread_states;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,7 +27,7 @@ public class ProducerConsumerTest {
         }
 
         for (int i = 0; i < countOfConsumers; i++) {
-            consumers.add(new Consumer<>(table, random.nextInt(800, 1000)));
+            consumers.add(new Consumer<>(table, random.nextInt(80, 100)));
         }
 
         for (int i = 0; i < producers.size(); i++) {
@@ -37,7 +37,6 @@ public class ProducerConsumerTest {
         for (int i = 0; i < consumers.size(); i++) {
             new Thread(consumers.get(i), "Consumer №" + i).start();
         }
-        System.out.println(Arrays.toString(actionCircles));
     }
 
     private static void createAndShowGUI() {
@@ -108,7 +107,6 @@ public class ProducerConsumerTest {
 
             JPanel circlePanel = actionCircles[indexOfThread];
             if (circlePanel != null) {
-                System.out.println(thread.getName() + " " + thread.getState());
                 if (threadState == Thread.State.WAITING) {
                     (circlePanel).setBackground(Color.YELLOW);
                 } else if (threadState == Thread.State.TIMED_WAITING) {
